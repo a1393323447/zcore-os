@@ -1,0 +1,51 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "wsl debug zcore-os with gdb-multiarch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/zig-out/bin/zcore-os",
+            "args": [],
+            "stopAtEntry": false,
+            "miDebuggerArgs": "",
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "pipeTransport": {
+                "debuggerPath": "/usr/bin/gdb-multiarch",
+                "pipeProgram": "/mnt/c/windows/system32/bash.exe",
+                "pipeArgs": [
+                    "-c"
+                ],
+                "pipeCwd": ""
+            },
+            "setupCommands": [
+                {
+                    "description": "Build zcore-os in debug mode",
+                    "text": "make build-debug",
+                },
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Arch to RISC-V 64",
+                    "text": "set arch riscv:rv64",
+                },
+                {
+                    "description": "Set remote target",
+                    "text": "target remote localhost:1234",
+                },
+                {
+                    "description": "Set a default breakpoint at 0x80200000",
+                    "text": "b *0x80200000",
+                }
+            ]
+        },
+    ]
+}
