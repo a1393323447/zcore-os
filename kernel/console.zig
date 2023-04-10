@@ -1,6 +1,7 @@
 const sbi = @import("sbi.zig");
 const shared = @import("shared");
 
+pub const Color = shared.console.Color;
 pub var logger = Stdout.init(Context{});
 
 // TODO Mutex

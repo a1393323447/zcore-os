@@ -18,8 +18,6 @@ const APP_SIZE_LIMIT: usize = 0x20000;
 pub var APP_MANAGER: AppManager = undefined;
 
 pub fn init() void {
-    console.logger.debug("align of KernelStack is {d} sp = {x}", .{ @alignOf(KernelStack), KERNEL_STACK.get_sp() });
-    console.logger.debug("align of UserStack is {d} sp = {x}", .{ @alignOf(UserStack), USER_STACK.get_sp() });
     APP_MANAGER = AppManager.load_symbols();
     APP_MANAGER.print_app_info();
 }

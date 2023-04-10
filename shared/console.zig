@@ -1,6 +1,6 @@
 const std = @import("std");
 
-const Color = enum {
+pub const Color = enum {
     Red,
     Yellow,
     Blue,
@@ -20,7 +20,7 @@ const Color = enum {
     }
 };
 
-const Level = enum {
+pub const Level = enum {
     Error,
     Warn,
     Info,
