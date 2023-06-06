@@ -1,4 +1,5 @@
 const std = @import("std");
+const lock = @import("lock.zig");
 
 pub const Color = enum {
     Red,
@@ -40,6 +41,8 @@ pub const Level = enum {
     }
 };
 
+var std_spin_lock = lock.SpinLock.init();
+
 pub fn Stdout(
     comptime Context: type,
     comptime WriteError: type,
@@ -57,6 +60,8 @@ pub fn Stdout(
         }
 
         pub fn print(self: *Self, comptime fmt: []const u8, args: anytype) void {
+            std_spin_lock.acquire();
+            defer std_spin_lock.release();
             nosuspend self.writer.print(fmt, args) catch return;
         }
 
